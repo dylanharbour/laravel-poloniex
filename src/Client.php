@@ -67,14 +67,16 @@ class Client implements ClientContract
     /**
      * Get my trade history.
      *
-     * @param string $pair
+     * @param $pair
+     * @param null $start
      * @return mixed
      */
-    public function getMyTradeHistory($pair)
+    public function getMyTradeHistory($pair, $start = null)
     {
         return $this->trading([
             'command' => 'returnTradeHistory',
-            'currencyPair' => strtoupper($pair)
+            'currencyPair' => strtoupper($pair),
+            'start' => $start ?? strtotime("- 1 year")
         ]);
     }
 
